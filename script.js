@@ -56,7 +56,7 @@ const serviceData = [
         oil: "Petronas sprinta f700"
     },
     {
-        date: "2024-07-06",
+        date: "2025-07-06",
         center: "Bikers Depot",
         cost: 4150,
         distance: 27090,
@@ -104,7 +104,8 @@ for (let i = 0; i < sorted.length - 1; i++) {
     }
 }
 
-console.log("diffdays" + totalDays)
+console.log("totaldays" + totalDays)
+console.log("totalkms" + totalKmAdded)
 
 const avgKmPerDay = totalKmAdded / totalDays;
 const avgKmMonth = avgKmPerDay * 30.44;
