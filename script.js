@@ -1,44 +1,68 @@
 const serviceData = [
     {
-        date: "2025-01-12",
-        center: "Shrestha Motors",
+        date: "2021-09-13",
+        center: "Bikers Depot",
+        cost: 2320,
+        distance: 8285,
+        oil: "Petronas sprinta f700"
+    },
+     {
+        date: "2022-02-15",
+        center: "Bikers Depot",
+        cost: 2500,
+        distance: 10115,
+        oil: "Petronas sprinta f700"
+    },
+     {
+        date: "2022-08-18",
+        center: "Bikers Depot",
         cost: 4500,
-        distance: 5000,
-        oil: "Fully Synthetic",
-        km: 32000
+        distance: 12178,
+        oil: "Petronas sprinta f700"
+    },
+     {
+        date: "2023-02-03",
+        center: "Bikers Depot",
+        cost: 3000,
+        distance: 14770,
+        oil: "Petronas sprinta f700"
+    },
+     {
+        date: "2023-08-16",
+        center: "Bikers Depot",
+        cost: 3500,
+        distance: 17280,
+        oil: "Petronas sprinta f700"
+    },
+     {
+        date: "2024-02-25",
+        center: "Bikers Depot",
+        cost: 4850,
+        distance: 20073,
+        oil: "Petronas sprinta f700"
     },
     {
-        date: "2024-10-05",
-        center: "AutoCare Nepal",
-        cost: 3800,
-        distance: 4500,
-        oil: "Semi Synthetic",
-        km: 27000
+        date: "2024-08-13",
+        center: "Bikers Depot",
+        cost: 4600,
+        distance: 23184,
+        oil: "Petronas sprinta f700"
     },
     {
-        date: "2024-06-22",
-        center: "Honda Service Center",
-        cost: 5200,
-        distance: 6000,
-        oil: "Fully Synthetic",
-        km: 22500
+        date: "2025-01-21",
+        center: "Bikers Depot",
+        cost: 6250,
+        distance: 25290,
+        oil: "Petronas sprinta f700"
     },
     {
-        date: "2024-03-15",
-        center: "Bishal Auto Hub",
-        cost: 4000,
-        distance: 4800,
-        oil: "Mineral",
-        km: 16500
-    },
-    {
-        date: "2023-12-01",
-        center: "Honda Service Center",
-        cost: 5000,
-        distance: 5500,
-        oil: "Fully Synthetic",
-        km: 11700
+        date: "2024-07-06",
+        center: "Bikers Depot",
+        cost: 4150,
+        distance: 27090,
+        oil: "Petronas sprinta f700"
     }
+    
 ];
 
 const tableBody = document.getElementById("serviceTableBody");
@@ -51,7 +75,6 @@ serviceData.forEach(item => {
             <td>${item.cost}</td>
             <td>${item.distance} km</td>
             <td><span class="tag">${item.oil}</span></td>
-            <td>${item.km}</td>
         </tr>
     `;
     tableBody.innerHTML += row;
@@ -72,7 +95,7 @@ for (let i = 0; i < sorted.length - 1; i++) {
     const newer = sorted[i];
     const older = sorted[i + 1];
 
-    const diffKm = newer.km - older.km;
+    const diffKm = newer.distance - older.distance;
     const diffDays = (new Date(newer.date) - new Date(older.date)) / (1000 * 3600 * 24);
 
     if (diffKm > 0 && diffDays > 0) {
