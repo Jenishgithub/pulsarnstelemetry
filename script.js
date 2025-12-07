@@ -62,6 +62,8 @@ serviceData.forEach(item => {
 // Sort by date (newest first)
 const sorted = [...serviceData].sort((a, b) => new Date(b.date) - new Date(a.date));
 
+console.log("sorted" + sorted[0].date)
+
 // Calculate average km per month & week
 let totalKmAdded = 0;
 let totalDays = 0;
@@ -78,6 +80,8 @@ for (let i = 0; i < sorted.length - 1; i++) {
         totalDays += diffDays;
     }
 }
+
+console.log("diffdays" + totalDays)
 
 const avgKmPerDay = totalKmAdded / totalDays;
 const avgKmMonth = avgKmPerDay * 30.44;
