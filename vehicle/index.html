@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Vehicle Service Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+
+    
+
+        <!-- Content Start -->
+        <div class="content">
+
+            <!-- Main Content Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4 mb-4">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="bg-secondary rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="mb-2 text-light">Avg km / Month</h6>
+                                    <h3 class="text-primary" id="avgMonth">--</h3>
+                                </div>
+                                <i class="fa fa-tachometer-alt fa-3x text-primary opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4">
+                        <div class="bg-secondary rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="mb-2 text-light">Avg km / Week</h6>
+                                    <h3 class="text-primary" id="avgWeek">--</h3>
+                                </div>
+                                <i class="fa fa-heartbeat fa-3x text-primary opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4">
+                        <div class="bg-secondary rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="mb-2 text-light">Days Since Last Service</h6>
+                                    <h3 class="text-primary" id="daysLast">--</h3>
+                                </div>
+                                <i class="fa fa-calendar fa-3x text-primary opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Start -->
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Vehicle Service Records</h6>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Servicing Date</th>
+                                            <th scope="col">Service Center</th>
+                                            <th scope="col">Cost (NPR)</th>
+                                            <th scope="col">Distance (Km)</th>
+                                            <th scope="col">Engine Oil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="serviceTableBody">
+                                        <!-- JS will populate -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Table End -->
+
+                <!-- Footer Start -->
+                <div class="row g-4 mt-4">
+                    <div class="col-12">
+                        <div class="bg-secondary rounded-top p-4">
+                            <div class="text-center">
+                                &copy; <a href="#">Vehicle Service Dashboard</a>, All Rights Reserved.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer End -->
+            </div>
+            <!-- Main Content End -->
+        </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="script.js"></script>
+</body>
+
+</html>

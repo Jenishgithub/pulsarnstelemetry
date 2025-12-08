@@ -72,7 +72,7 @@ serviceData.forEach(item => {
         <tr>
             <td>${item.date}</td>
             <td>${item.center}</td>
-            <td>${item.cost}</td>
+            <td>₨${item.cost}</td>
             <td>${item.distance} km</td>
             <td><span class="tag">${item.oil}</span></td>
         </tr>
@@ -120,3 +120,31 @@ const daysSince = Math.floor((today - lastService) / (1000 * 3600 * 24));
 document.getElementById("avgMonth").innerText = Math.round(avgKmMonth) + " km";
 document.getElementById("avgWeek").innerText = Math.round(avgKmWeek) + " km";
 document.getElementById("daysLast").innerText = daysSince + " days";
+
+/* ========== SIDEBAR TOGGLE ========== */
+// Sidebar toggle functionality
+$(document).ready(function() {
+    // Hide spinner on load
+    $("#spinner").fadeOut("slow");
+    
+    // Sidebar toggle
+    $(".sidebar-toggler").on("click", function(e) {
+        e.preventDefault();
+        $(".sidebar").toggleClass("open");
+        $(".content").toggleClass("open");
+    });
+    
+    // Back to top
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 300) {
+            $(".back-to-top").fadeIn("slow");
+        } else {
+            $(".back-to-top").fadeOut("slow");
+        }
+    });
+    
+    $(".back-to-top").click(function(e) {
+        e.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    });
+});
