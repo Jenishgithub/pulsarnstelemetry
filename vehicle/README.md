@@ -27,7 +27,7 @@ This dashboard uses **Google Apps Script** to create a serverless API endpoint t
 
 ### Step 1: Create the Google Apps Script
 
-1. Open your Google Sheet
+1. Open your Google Sheet (make sure your spreadsheet table starts with first row and first column)
 2. Go to **Extensions** → **Apps Script**
 3. Replace the default code with the following:
 
