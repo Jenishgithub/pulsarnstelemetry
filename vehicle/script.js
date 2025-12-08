@@ -1,139 +1,96 @@
-const serviceData = [
-    {
-        date: "2021-09-13",
-        center: "Bikers Depot",
-        cost: 2320,
-        distance: 8285,
-        oil: "Petronas sprinta f700"
-    },
-     {
-        date: "2022-02-15",
-        center: "Bikers Depot",
-        cost: 2500,
-        distance: 10115,
-        oil: "Petronas sprinta f700"
-    },
-     {
-        date: "2022-08-18",
-        center: "Bikers Depot",
-        cost: 4500,
-        distance: 12178,
-        oil: "Petronas sprinta f700"
-    },
-     {
-        date: "2023-02-03",
-        center: "Bikers Depot",
-        cost: 3000,
-        distance: 14770,
-        oil: "Petronas sprinta f700"
-    },
-     {
-        date: "2023-08-16",
-        center: "Bikers Depot",
-        cost: 3500,
-        distance: 17280,
-        oil: "Petronas sprinta f700"
-    },
-     {
-        date: "2024-02-25",
-        center: "Bikers Depot",
-        cost: 4850,
-        distance: 20073,
-        oil: "Petronas sprinta f700"
-    },
-    {
-        date: "2024-08-13",
-        center: "Bikers Depot",
-        cost: 4600,
-        distance: 23184,
-        oil: "Petronas sprinta f700"
-    },
-    {
-        date: "2025-01-21",
-        center: "Bikers Depot",
-        cost: 6250,
-        distance: 25290,
-        oil: "Petronas sprinta f700"
-    },
-    {
-        date: "2025-07-06",
-        center: "Bikers Depot",
-        cost: 4150,
-        distance: 27090,
-        oil: "Petronas sprinta f700"
+const csvUrl = "https://script.google.com/macros/s/AKfycbwNJr2iAiOHxYG2QsS3chuQajhpGRecgwOik8LqQCb38aC3ioNaHtgLF9e_a4_VPKHRYg/exec";
+
+// Calculate and update statistics based on data
+function calculateAndUpdateStats(data) {
+    // Sort by date (newest first)
+    const sorted = [...data].sort((a, b) => {
+        const dateA = new Date(a["Servicing Date"]);
+        const dateB = new Date(b["Servicing Date"]);
+        return dateB - dateA;
+    });
+
+    console.log("sorted:", sorted[0]);
+
+    // Calculate average km per month & week
+    let totalKmAdded = 0;
+    let totalDays = 0;
+
+    for (let i = 0; i < sorted.length - 1; i++) {
+        const newer = sorted[i];
+        const older = sorted[i + 1];
+
+        const distanceNew = parseInt(newer["Distance Covered (Km)"]);
+        const distanceOld = parseInt(older["Distance Covered (Km)"]);
+        const diffKm = distanceNew - distanceOld;
+        
+        const dateNew = new Date(newer["Servicing Date"]);
+        const dateOld = new Date(older["Servicing Date"]);
+        const diffDays = (dateNew - dateOld) / (1000 * 3600 * 24);
+
+        if (diffKm > 0 && diffDays > 0) {
+            totalKmAdded += diffKm;
+            totalDays += diffDays;
+        }
     }
-    
-];
 
-const tableBody = document.getElementById("serviceTableBody");
+    console.log("totaldays:", totalDays);
+    console.log("totalkms:", totalKmAdded);
 
-serviceData.forEach(item => {
-    const row = `
-        <tr>
-            <td>${item.date}</td>
-            <td>${item.center}</td>
-            <td>₨${item.cost}</td>
-            <td>${item.distance} km</td>
-            <td><span class="tag">${item.oil}</span></td>
-        </tr>
-    `;
-    tableBody.innerHTML += row;
-});
+    const avgKmPerDay = totalKmAdded / totalDays;
+    const avgKmMonth = avgKmPerDay * 30.44;
+    const avgKmWeek = avgKmPerDay * 7;
 
-/* ========== CALCULATE STATS ========== */
+    // Days since last service
+    const lastService = new Date(sorted[0]["Servicing Date"]);
+    const today = new Date();
+    const daysSince = Math.floor((today - lastService) / (1000 * 3600 * 24));
 
-// Sort by date (newest first)
-const sorted = [...serviceData].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-console.log("sorted" + sorted[0].date)
-
-// Calculate average km per month & week
-let totalKmAdded = 0;
-let totalDays = 0;
-
-for (let i = 0; i < sorted.length - 1; i++) {
-    const newer = sorted[i];
-    const older = sorted[i + 1];
-
-    const diffKm = newer.distance - older.distance;
-    const diffDays = (new Date(newer.date) - new Date(older.date)) / (1000 * 3600 * 24);
-
-    if (diffKm > 0 && diffDays > 0) {
-        totalKmAdded += diffKm;
-        totalDays += diffDays;
-    }
+    // Update UI
+    document.getElementById("avgMonth").innerText = Math.round(avgKmMonth) + " km";
+    document.getElementById("avgWeek").innerText = Math.round(avgKmWeek) + " km";
+    document.getElementById("daysLast").innerText = daysSince + " days";
 }
 
-console.log("totaldays" + totalDays)
-console.log("totalkms" + totalKmAdded)
+function loadTable(data) {
+    const tableBody = document.getElementById("serviceTableBody");
+    tableBody.innerHTML = "";
 
-const avgKmPerDay = totalKmAdded / totalDays;
-const avgKmMonth = avgKmPerDay * 30.44;
-const avgKmWeek = avgKmPerDay * 7;
-
-// Days since last service
-const lastService = new Date(sorted[0].date);
-const today = new Date();
-const daysSince = Math.floor((today - lastService) / (1000 * 3600 * 24));
-
-// Update UI
-document.getElementById("avgMonth").innerText = Math.round(avgKmMonth) + " km";
-document.getElementById("avgWeek").innerText = Math.round(avgKmWeek) + " km";
-document.getElementById("daysLast").innerText = daysSince + " days";
-
-/* ========== SIDEBAR TOGGLE ========== */
-// Sidebar toggle functionality
-$(document).ready(function() {
-    // Hide spinner on load
-    $("#spinner").fadeOut("slow");
-    
-    // Sidebar toggle
-    $(".sidebar-toggler").on("click", function(e) {
-        e.preventDefault();
-        $(".sidebar").toggleClass("open");
-        $(".content").toggleClass("open");
+    data.forEach(item => {
+        console.log(item);
+        
+        const row = `
+            <tr>
+                <td>${item["Servicing Date"]}</td>
+                <td>${item["Service Center"]}</td>
+                <td>₨${item["Cost"]}</td>
+                <td>${item["Distance Covered (Km)"]} km</td>
+                <td><span class="tag">${item["Engine Oil"]}</span></td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
     });
-    
+
+    // Calculate and update statistics after loading table
+    calculateAndUpdateStats(data);
+}
+
+// Use the fetch() function to make a GET request
+fetch(csvUrl)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Fetched data:', data);
+    loadTable(data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+/* ========== BACK TO TOP ========== */
+$(document).ready(function() {
     // Back to top
     $(window).scroll(function() {
         if ($(this).scrollTop() > 300) {
