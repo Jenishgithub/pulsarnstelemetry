@@ -1,4 +1,4 @@
-const csvUrl = "https://script.google.com/macros/s/AKfycbwNJr2iAiOHxYG2QsS3chuQajhpGRecgwOik8LqQCb38aC3ioNaHtgLF9e_a4_VPKHRYg/exec";
+const csvUrl = "https://script.google.com/macros/s/AKfycby_2oSxv4gsS-z2_4Qk4d6q4nkdq81beNzkJvWhDBkXCL8vhYM8ElkooJAyhACsbdFa/exec";
 
 // Calculate and update statistics based on data
 function calculateAndUpdateStats(data) {
