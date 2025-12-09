@@ -141,3 +141,11 @@ For issues or questions, please open an issue on the repository.
 ✔️ Only the script accesses it
 ✔️ People cannot view your sheet
 ✔️ Your website can read the JSON
+
+
+## TODO
+
+- Format date properly.
+- Take data upto this date 2025-07-06 only for calculations.(from that date your vehicle's speedmeter broke down)
+- Using data till that date, estimate the km run till upto today.
+- add pagination to tables
