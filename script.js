@@ -129,8 +129,15 @@ function goToPage(pageNum) {
 }
 
 function loadTable(data) {
-    // Store all data for pagination
-    allData = data;
+    // Sort data by date (latest first, oldest last)
+    const sortedData = [...data].sort((a, b) => {
+        const dateA = new Date(a["Servicing Date"]);
+        const dateB = new Date(b["Servicing Date"]);
+        return dateB - dateA;
+    });
+    
+    // Store all sorted data for pagination
+    allData = sortedData;
     currentPage = 1;
     
     console.log("Total records:", data.length);
@@ -139,7 +146,7 @@ function loadTable(data) {
     displayPage(1);
     
     // Calculate and update statistics after loading table
-    calculateAndUpdateStats(data);
+    calculateAndUpdateStats(sortedData);
 }
 
 // Use the fetch() function to make a GET request
