@@ -1,6 +1,6 @@
 const csvUrl = "https://script.google.com/macros/s/AKfycby_2oSxv4gsS-z2_4Qk4d6q4nkdq81beNzkJvWhDBkXCL8vhYM8ElkooJAyhACsbdFa/exec";
 
-const ROWS_PER_PAGE = 8;
+const ROWS_PER_PAGE = 7;
 let currentPage = 1;
 let allData = [];
 
