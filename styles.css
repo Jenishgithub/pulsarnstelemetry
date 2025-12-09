@@ -130,3 +130,48 @@ body {
 .opacity-50 {
     opacity: 0.5;
 }
+
+/*** Pagination Styling ***/
+.pagination {
+    display: flex;
+    gap: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-item {
+    margin: 0;
+}
+
+.page-item .page-link {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: var(--secondary);
+    border: 1px solid #2a2d3a;
+    color: var(--light);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.page-item .page-link:hover:not(.disabled) {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.page-item.disabled .page-link {
+    color: #4a4d5a;
+    cursor: not-allowed;
+    background-color: #2a2d3a;
+    border-color: #2a2d3a;
+    opacity: 0.6;
+}

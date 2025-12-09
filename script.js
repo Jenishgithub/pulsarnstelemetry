@@ -1,5 +1,9 @@
 const csvUrl = "https://script.google.com/macros/s/AKfycby_2oSxv4gsS-z2_4Qk4d6q4nkdq81beNzkJvWhDBkXCL8vhYM8ElkooJAyhACsbdFa/exec";
 
+const ROWS_PER_PAGE = 8;
+let currentPage = 1;
+let allData = [];
+
 // Calculate and update statistics based on data
 function calculateAndUpdateStats(data) {
     // Sort by date (newest first)
@@ -51,13 +55,16 @@ function calculateAndUpdateStats(data) {
     document.getElementById("daysLast").innerText = daysSince + " days";
 }
 
-function loadTable(data) {
+// Display table rows for current page
+function displayPage(pageNum) {
     const tableBody = document.getElementById("serviceTableBody");
     tableBody.innerHTML = "";
-
-    data.forEach(item => {
-        console.log(item);
-        
+    
+    const startIndex = (pageNum - 1) * ROWS_PER_PAGE;
+    const endIndex = startIndex + ROWS_PER_PAGE;
+    const pageData = allData.slice(startIndex, endIndex);
+    
+    pageData.forEach(item => {
         const row = `
             <tr>
                 <td>${item["Servicing Date"]}</td>
@@ -69,7 +76,59 @@ function loadTable(data) {
         `;
         tableBody.innerHTML += row;
     });
+    
+    // Update pagination controls
+    updatePaginationControls(pageNum);
+}
 
+// Update pagination buttons
+function updatePaginationControls(currentPageNum) {
+    const totalPages = Math.ceil(allData.length / ROWS_PER_PAGE);
+    const paginationControls = document.getElementById("paginationControls");
+    paginationControls.innerHTML = "";
+    
+    // Previous button
+    const prevButton = document.createElement("li");
+    prevButton.className = `page-item ${currentPageNum === 1 ? "disabled" : ""}`;
+    prevButton.innerHTML = `<a class="page-link" href="#" onclick="goToPage(${currentPageNum - 1}); return false;">Previous</a>`;
+    paginationControls.appendChild(prevButton);
+    
+    // Page number buttons
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement("li");
+        pageButton.className = `page-item ${i === currentPageNum ? "active" : ""}`;
+        pageButton.innerHTML = `<a class="page-link" href="#" onclick="goToPage(${i}); return false;">${i}</a>`;
+        paginationControls.appendChild(pageButton);
+    }
+    
+    // Next button
+    const nextButton = document.createElement("li");
+    nextButton.className = `page-item ${currentPageNum === totalPages ? "disabled" : ""}`;
+    nextButton.innerHTML = `<a class="page-link" href="#" onclick="goToPage(${currentPageNum + 1}); return false;">Next</a>`;
+    paginationControls.appendChild(nextButton);
+}
+
+// Navigate to specific page
+function goToPage(pageNum) {
+    const totalPages = Math.ceil(allData.length / ROWS_PER_PAGE);
+    if (pageNum >= 1 && pageNum <= totalPages) {
+        currentPage = pageNum;
+        displayPage(pageNum);
+        // Scroll to table
+        document.querySelector(".table").scrollIntoView({ behavior: "smooth" });
+    }
+}
+
+function loadTable(data) {
+    // Store all data for pagination
+    allData = data;
+    currentPage = 1;
+    
+    console.log("Total records:", data.length);
+    
+    // Display first page
+    displayPage(1);
+    
     // Calculate and update statistics after loading table
     calculateAndUpdateStats(data);
 }
