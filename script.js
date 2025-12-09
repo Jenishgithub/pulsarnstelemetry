@@ -4,6 +4,15 @@ const ROWS_PER_PAGE = 8;
 let currentPage = 1;
 let allData = [];
 
+// Format date to YYYY-MM-DD format
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 // Calculate and update statistics based on data
 function calculateAndUpdateStats(data) {
     // Sort by date (newest first)
@@ -67,7 +76,7 @@ function displayPage(pageNum) {
     pageData.forEach(item => {
         const row = `
             <tr>
-                <td>${item["Servicing Date"]}</td>
+                <td>${formatDate(item["Servicing Date"])}</td>
                 <td>${item["Service Center"]}</td>
                 <td>₨${item["Cost"]}</td>
                 <td>${item["Distance Covered (Km)"]} km</td>
