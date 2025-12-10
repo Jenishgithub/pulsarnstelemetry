@@ -69,6 +69,7 @@ function calculateAndUpdateStats(data) {
     // Update UI
     document.getElementById("avgMonth").innerText = Math.round(avgKmMonth) + " km";
     document.getElementById("avgWeek").innerText = Math.round(avgKmWeek) + " km";
+    document.getElementById("avgDay").innerText = Math.round(avgKmPerDay) + " km";
     document.getElementById("daysLast").innerText = daysSince + " days";
 }
 
