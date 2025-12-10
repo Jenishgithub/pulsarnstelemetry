@@ -145,6 +145,5 @@ For issues or questions, please open an issue on the repository.
 
 ## TODO
 
-- Add UI component for avg km run per day as well.
-- Take data upto this date 2025-07-06 only for calculations.(from that date your vehicle's speedmeter broke down)
-- Using data till that date, estimate the km run till upto today.
+- Take data upto this date 2025-07-06 only for calculations.(from that date your vehicle's speedmeter broke down) [need to test calculation]
+- Add UI for estimated km run since last servicing.
